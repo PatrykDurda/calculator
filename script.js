@@ -1,26 +1,26 @@
 // MAIN CALCULATOR
 const calculator = {
-  displayValue: '0',
-  firstOperand: null,
-  SecondOperand: false,
+  displayValue: '0', //string value for input of user / result of operation
+  firstArgument: null, // first operand
+  SecondArgument: false,
   operator: null,
 };
 // INPUTING DIGIT
 function inputDigit(digit) {
-  const { displayValue, SecondOperand } = calculator;
+  const { displayValue, SecondArgument } = calculator;
 
-  if (SecondOperand === true) {
+  if (SecondArgument === true) {
     calculator.displayValue = digit;
-    calculator.SecondOperand = false;
+    calculator.SecondArgument = false;
   } else {
     calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
   }
 }
 // INPUTING DECIMAL
 function inputDecimal(dot) {
-  if (calculator.SecondOperand === true) {
+  if (calculator.SecondArgument === true) {
   	calculator.displayValue = "0."
-    calculator.SecondOperand = false;
+    calculator.SecondArgument = false;
     return
   }
 
@@ -30,46 +30,46 @@ function inputDecimal(dot) {
 }
 // INPUTING NEXT OPERATOR
 function handleOperator(nextOperator) {
-  const { firstOperand, displayValue, operator } = calculator
+  const { firstArgument, displayValue, operator } = calculator
   const inputValue = parseFloat(displayValue);
-  
-  if (operator && calculator.SecondOperand)  {
+  // adding another operator to the output.
+  if (operator && calculator.SecondArgument)  {
     calculator.operator = nextOperator;
     return;
   }
 
-
-  if (firstOperand == null && !isNaN(inputValue)) {
-    calculator.firstOperand = inputValue;
+  // 
+  if (firstArgument == null && !isNaN(inputValue)) {
+    calculator.firstArgument = inputValue;
   } else if (operator) {
-    const result = calculate(firstOperand, inputValue, operator);
+    const result = calculate(firstArgument, inputValue, operator);
 
     calculator.displayValue = `${parseFloat(result.toFixed(7))}`;
-    calculator.firstOperand = result;
+    calculator.firstArgument = result;
   }
 
-  calculator.SecondOperand = true;
+  calculator.SecondArgument = true;
   calculator.operator = nextOperator;
 }
 
-function calculate(firstOperand, secondOperand, operator) {
+function calculate(firstArgument, secondArgument, operator) {
   if (operator === '+') {
-    return firstOperand + secondOperand;
+    return firstArgument + secondArgument;
   } else if (operator === '-') {
-    return firstOperand - secondOperand;
+    return firstArgument - secondArgument;
   } else if (operator === '*') {
-    return firstOperand * secondOperand;
+    return firstArgument * secondArgument;
   } else if (operator === '/') {
-    return firstOperand / secondOperand;
+    return firstArgument / secondArgument;
   }
-  return secondOperand;
+  return secondArgument;
 }
 
 
 function resetCalculator() {
   calculator.displayValue = '0';
-  calculator.firstOperand = null;
-  calculator.SecondOperand = false;
+  calculator.firstArgument = null;
+  calculator.SecondArgument = false;
   calculator.operator = null;
 }
 
