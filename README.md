@@ -1,4 +1,4 @@
 # calculator
  
 
-https://tayleee.github.io/calculator/
+https://patrykdurda.github.io/calculator/
